@@ -13,47 +13,55 @@ interface DataItem {
   image: string;
 }
 
+
+let heroSearch = "batman";
+const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007"
+
 const DataComponent: React.FC = () => {
   const [items, setItems] = useState<DataItem[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
+  const [search, setSearch] = useState<string>("batman");
+  const handleChange = (e: { target: { value: string}; }) => {setSearch(e.target.value)};
+  
+  
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+        let API_CALL = `https://www.superheroapi.com/api.php/${API_KEY}/search/${search}`
+  //       const response = await fetch(API_CALL);
+  //       const data = await response.json();
+  //       console.log("API Data", data)
+  //       setItems(data.results);
+  //     } catch (error) {
+  //       console.error('Failed to fetch data:', error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-  let heroSearch = "batman";
-  const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007"
-  let API_CALL = `https://www.superheroapi.com/api.php/${API_KEY}/search/${heroSearch}`
+  //   fetchData();
+  // }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(API_CALL);
-        const data = await response.json();
-        console.log("API Data", data)
-        setItems(data.results);
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  async function getResponse() {
+    const response = await fetch(API_CALL);
+    const data = await response.json();
+  }
 
-    fetchData();
-  }, []);
-
-  if (isLoading) return <p>Loading...</p>;
+  //if (isLoading) return <p>Loading...</p>;
 
   return (
     <div>
       <h1>Hero Finder</h1>
+        <input type="text" value={search} onChange={handleChange}></input>
       <ul>    
         {(Array.isArray(items)) && items.map(item => (
           <>
             <li key={item.id} className="text-xl font-bold italic text-center mb-4">Name: {item.name} ({item.biography.aliases[0]})</li>
-            <img key={item.id} className="rounded-full shadow-2xl size-1/3" src={item.image.url} />
+            <img key={item.id} className="rounded-full shadow-2xl size-1/3 justify-center" src={item.image.url} />
             <li key={item.id}>Strength: {item.powerstats.strength}</li>
             <li key={item.id}>Intelligence: {item.powerstats.intelligence}</li>
           </>
         ))}
-        {/* {items.map(item => (
-          <li key={item.id}>{item.biography.aliases[0]}</li>))} */}
       </ul>
     </div>
   );
