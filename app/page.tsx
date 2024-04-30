@@ -1,5 +1,8 @@
 //How to set powerstats as an array in interface?
-//How to set interface types that are one level deeper?
+//How to set interface types that are one level deeper? - DESTRUCTURING
+//Making responsive designs with Tailwind
+//Naming conventions - items?
+//Limit API calls?
 //How to keep API call server side with useState/useEffect being client side?
 
 'use client'
@@ -7,53 +10,83 @@
 import React, { useEffect, useState } from 'react';
 
 interface DataItem {
-  powerstats: any;
+  powerstats: number[];
   id: number;
   name: string;
-  image: string;
+  image: {
+    url: string;
+  }
 }
 
 
-let heroSearch = "batman";
+//let heroSearch = "batman";
 const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007"
 
 const DataComponent: React.FC = () => {
   const [items, setItems] = useState<DataItem[]>([]);
-  const [isLoading, setLoading] = useState<boolean>(true);
+  //const [isLoading, setLoading] = useState<boolean>(true);
   const [search, setSearch] = useState<string>("batman");
-  const handleChange = (e: { target: { value: string}; }) => {setSearch(e.target.value)};
+  //const handleChange = (e: { target: { value: string}; }) => {setSearch(e.target.value)};
   
-  
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-        let API_CALL = `https://www.superheroapi.com/api.php/${API_KEY}/search/${search}`
-  //       const response = await fetch(API_CALL);
-  //       const data = await response.json();
-  //       console.log("API Data", data)
-  //       setItems(data.results);
-  //     } catch (error) {
-  //       console.error('Failed to fetch data:', error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  async function getResponse() {
-    const response = await fetch(API_CALL);
-    const data = await response.json();
+  const searchItems = (searchValue: string) => {
+    setSearch(searchValue)
+    console.log(searchValue)
   }
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+       let API_CALL = `https://www.superheroapi.com/api.php/${API_KEY}/search/${search}`
+        const response = await fetch(API_CALL);
+        const data = await response.json();
+        console.log("API Data", data)
+        setItems(data.results);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      } 
+      // finally {
+      //   setLoading(false);
+      // }
+    };
+
+    fetchData();
+  }, [search]);
+
+  ///////////////////////////////////////////////////////////////////
+  // async function getResponse() {
+  //   let API_CALL = `https://www.superheroapi.com/api.php/${API_KEY}/search/${search}`
+  //   const response = await fetch(API_CALL);
+  //   if (!response.ok) {
+  //     throw new Error(`HTTP error! status: ${response.status}`)
+  //   }
+  //   const data = await response.json();
+  //   setItems(data.results);
+  //   //let heroInfo = data.results;
+  //   console.log("API Data", data)
+    
+  //   getResponse();
+  // }
+
+  ////////////////////////////////////////////////////////////////
   //if (isLoading) return <p>Loading...</p>;
+
+
+  function handleClick() {
+    setSearch("cat");
+    console.log("button did a thing");
+  }
 
   return (
     <div>
       <h1>Hero Finder</h1>
-        <input type="text" value={search} onChange={handleChange}></input>
-      <ul>    
+        <input type="text" value={search} onChange={(e) => searchItems(e.target.value)}></input>
+        <button style={{backgroundColor: "green", height: 30, width: 100, borderRadius: 20}} onClick={()=> handleClick()}>Catify</button>
+        <ul>
+          {items.map(item => <li key={item.id} className="flex row justify-between w-1/2" onClick={() => setSearch(item.name)} ># {item.id} - {item.name} <img className="h-20 rounded-full" src={item.image.url}/></li>)}
+        </ul>
+
+
+      {/* <ul>    
         {(Array.isArray(items)) && items.map(item => (
           <>
             <li key={item.id} className="text-xl font-bold italic text-center mb-4">Name: {item.name} ({item.biography.aliases[0]})</li>
@@ -62,7 +95,7 @@ const DataComponent: React.FC = () => {
             <li key={item.id}>Intelligence: {item.powerstats.intelligence}</li>
           </>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
