@@ -7,7 +7,7 @@
 
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FormEvent } from 'react';
 
 interface DataItem {
   powerstats: number[];
@@ -25,18 +25,23 @@ const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007"
 const DataComponent: React.FC = () => {
   const [items, setItems] = useState<DataItem[]>([]);
   //const [isLoading, setLoading] = useState<boolean>(true);
+  const [searchString, setSearchString] = useState<string>("");
   const [search, setSearch] = useState<string>("batman");
   //const handleChange = (e: { target: { value: string}; }) => {setSearch(e.target.value)};
   
   const searchItems = (searchValue: string) => {
-    setSearch(searchValue)
+    if (searchValue === null || searchValue === "") {
+      setSearch("a")
+    } else {
+      setSearch(searchValue)
+    }
     console.log(searchValue)
   }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-       let API_CALL = `https://www.superheroapi.com/api.php/${API_KEY}/search/${search}`
+        let API_CALL = `https://www.superheroapi.com/api.php/${API_KEY}/search/${search}`
         const response = await fetch(API_CALL);
         const data = await response.json();
         console.log("API Data", data)
@@ -76,10 +81,32 @@ const DataComponent: React.FC = () => {
     console.log("button did a thing");
   }
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchString(event.target.value);
+    console.log(searchString);
+  }
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (searchString === null || searchString === "") {
+      console.log("No search Parameter set");
+    } else {
+    setSearch(searchString);
+    }
+  }
+
   return (
     <div>
       <h1>Hero Finder</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={searchString} onChange={handleInputChange} placeholder="Hero search"/>
+        <button type="submit">submit</button>
+      </form>
+      
+      {/* <form>
         <input type="text" value={search} onChange={(e) => searchItems(e.target.value)}></input>
+        <input type="submit" value="submit"/>
+      </form> */}
         <button style={{backgroundColor: "green", height: 30, width: 100, borderRadius: 20}} onClick={()=> handleClick()}>Catify</button>
         <ul>
           {items.map(item => <li key={item.id} className="flex row justify-between w-1/2" onClick={() => setSearch(item.name)} ># {item.id} - {item.name} <img className="h-20 rounded-full" src={item.image.url}/></li>)}
