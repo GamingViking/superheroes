@@ -1,15 +1,16 @@
 //How to set powerstats as an array in interface?
-//How to set interface types that are one level deeper? - DESTRUCTURING
-//Making responsive designs with Tailwind
-//Naming conventions - items?
-//Limit API calls?
+//Making responsive designs with Tailwind - flex none
 //How to keep API call server side with useState/useEffect being client side?
+//Rounded input field cutting off first letter - move typing area?
+//Remove/style scrollbar?
+//Center alignment for search results on desktop?
 
 'use client'
 
 import React, { useEffect, useState, FormEvent } from 'react';
+import { PiMagnifyingGlassLight } from "react-icons/pi";
 
-interface DataItem {
+interface HeroData {
   powerstats: number[];
   id: number;
   name: string;
@@ -23,13 +24,13 @@ interface DataItem {
 const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007"
 
 const DataComponent: React.FC = () => {
-  const [items, setItems] = useState<DataItem[]>([]);
+  const [heroes, setHeroes] = useState<HeroData[]>([]);
   //const [isLoading, setLoading] = useState<boolean>(true);
   const [searchString, setSearchString] = useState<string>("");
   const [search, setSearch] = useState<string>("batman");
   //const handleChange = (e: { target: { value: string}; }) => {setSearch(e.target.value)};
   
-  const searchItems = (searchValue: string) => {
+  const searchHeroes = (searchValue: string) => {
     if (searchValue === null || searchValue === "") {
       setSearch("a")
     } else {
@@ -45,7 +46,7 @@ const DataComponent: React.FC = () => {
         const response = await fetch(API_CALL);
         const data = await response.json();
         console.log("API Data", data)
-        setItems(data.results);
+        setHeroes(data.results);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } 
@@ -95,22 +96,38 @@ const DataComponent: React.FC = () => {
     }
   }
 
+  class SearchIcon extends React.Component {
+    render() {
+      return <PiMagnifyingGlassLight />
+    }
+  }
   return (
     <div>
-      <h1>Hero Finder</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={searchString} onChange={handleInputChange} placeholder="Hero search"/>
-        <button type="submit">submit</button>
-      </form>
-      
-      {/* <form>
-        <input type="text" value={search} onChange={(e) => searchItems(e.target.value)}></input>
-        <input type="submit" value="submit"/>
-      </form> */}
-        <button style={{backgroundColor: "green", height: 30, width: 100, borderRadius: 20}} onClick={()=> handleClick()}>Catify</button>
-        <ul>
-          {items.map(item => <li key={item.id} className="flex row justify-between w-1/2" onClick={() => setSearch(item.name)} ># {item.id} - {item.name} <img className="h-20 rounded-full" src={item.image.url}/></li>)}
-        </ul>
+      <h1 className="text-center my-2">Heroes & Villains </h1>
+      <div className="flex justify-center">
+        <form onSubmit={handleSubmit}>
+          <input type="text" 
+          className="m-2 rounded-lg text-center"
+          value={searchString} 
+          onChange={handleInputChange} 
+          placeholder=" Hero search"/>
+          <button 
+          className="bg-white rounded-full p-1"
+          type="submit"><SearchIcon></SearchIcon></button>
+          
+        </form>
+      </div>
+        <div className="overflow-scroll mt-4">
+          <ul className='flex row scroll-smooth text-center'>
+            {heroes.map(hero => 
+            <li 
+              key={hero.id} 
+              className="column mx-2 flex-none" 
+              onClick={() => setSearch(hero.name)} >
+                <img className="w-auto h-40 rounded-full" src={hero.image.url}/>{hero.name}
+              </li>)}
+          </ul>
+        </div>
 
 
       {/* <ul>    
