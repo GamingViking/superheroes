@@ -1,14 +1,25 @@
-//How to set powerstats as an array in interface?
 //Making responsive designs with Tailwind - flex none
+//Rounded input field cutting off first letter - add padding to element
 //How to keep API call server side with useState/useEffect being client side?
-//Rounded input field cutting off first letter - move typing area?
-//Remove/style scrollbar?
-//Center alignment for search results on desktop?
+//Remove/style scrollbar- hidden with a style in globalcss
+//Change class components to functional components - icons?
+//serach icon adjustment - absolute positioning?
+//Tailwind shorthand intellisense showing up?
+//Componentize elements
+//Handle searching names that aren't included
+//Using variables in a className? - pass an object with string interpolation
+//Colors for background gradient - aesthetic?
+//Currently grabbing previous hero's aligment for display - useEffect hook updating on alignment
+//Aesthetic improvements?
+//What should be inside of DataComponent?
+//Sizing not working? i.e. 1/2?
+//Bolding part of text, not tailwindy?
 
 'use client'
 
 import React, { useEffect, useState, FormEvent } from 'react';
 import { PiMagnifyingGlassLight } from "react-icons/pi";
+import HeroInformation from './components/heroinformation';
 
 interface HeroData {
   powerstats: number[];
@@ -19,16 +30,37 @@ interface HeroData {
   }
 }
 
+interface HeroInfo {
+  powerstats: number[];
+  biography: {
+    "full-name": string;
+    publisher: string;
+    alignment: string;
+  }
+  id: number;
+  name: string;
+  image: {
+    url: string;
+  }
+}
 
 //let heroSearch = "batman";
-const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007"
+const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007";
+// let bgColor1 = "from-blue-100";
+// let bgColor2 = "via-yellow-200";
+// let bgColor3 = "to-blue-100";
 
 const DataComponent: React.FC = () => {
   const [heroes, setHeroes] = useState<HeroData[]>([]);
   //const [isLoading, setLoading] = useState<boolean>(true);
   const [searchString, setSearchString] = useState<string>("");
   const [search, setSearch] = useState<string>("batman");
-  //const handleChange = (e: { target: { value: string}; }) => {setSearch(e.target.value)};
+  const [searchId, setSearchId] = useState<number>(70);
+  const [heroInfo, setHeroInfo] = useState<HeroInfo>(Object);
+  const [bgColor1, setBgColor1] = useState<string>("from-blue-100");
+  const [bgColor2, setBgColor2] = useState<string>("via-yellow-200");
+  const [bgColor3, setBgColor3] = useState<string>("to-blue-100");
+  const [infoSelection, setInfoSelection] = useState<string>("description");
   
   const searchHeroes = (searchValue: string) => {
     if (searchValue === null || searchValue === "") {
@@ -39,6 +71,7 @@ const DataComponent: React.FC = () => {
     console.log(searchValue)
   }
 
+  //Search Hero Pool
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -54,33 +87,52 @@ const DataComponent: React.FC = () => {
       //   setLoading(false);
       // }
     };
-
     fetchData();
   }, [search]);
 
-  ///////////////////////////////////////////////////////////////////
-  // async function getResponse() {
-  //   let API_CALL = `https://www.superheroapi.com/api.php/${API_KEY}/search/${search}`
-  //   const response = await fetch(API_CALL);
-  //   if (!response.ok) {
-  //     throw new Error(`HTTP error! status: ${response.status}`)
-  //   }
-  //   const data = await response.json();
-  //   setItems(data.results);
-  //   //let heroInfo = data.results;
-  //   console.log("API Data", data)
-    
-  //   getResponse();
-  // }
+  //Search Individual Hero
+  useEffect(() => {
+    const fetchHeroInfo = async () => {
+      try {
+        let API_HERO_CALL = `https://www.superheroapi.com/api.php/${API_KEY}/${searchId}`
+        const response = await fetch(API_HERO_CALL);
+        const data = await response.json();
+        console.log("API Data", data)
+        setHeroInfo(data);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      } 
 
-  ////////////////////////////////////////////////////////////////
+      // finally {
+      //   setLoading(false);
+      // }
+    };
+    fetchHeroInfo();
+  }, [searchId]);
+
+  //Change gradient color with alignment
+  useEffect(() => {
+    console.log(heroInfo?.biography?.alignment)
+    if (heroInfo?.biography?.alignment === "good") {
+      setBgColor1("from-blue-100");
+      setBgColor2("via-gray-100");
+      setBgColor3("to-blue-100");
+    } else if (heroInfo?.biography?.alignment === "neutral") {
+      setBgColor1("from-orange-100");
+      setBgColor2("via-gray-100");
+      setBgColor3("to-orange-100");
+    } else if (heroInfo?.biography?.alignment === "bad") {
+      setBgColor1("from-red-100");
+      setBgColor2("via-gray-100");
+      setBgColor3("to-red-100");
+    } else {
+      setBgColor1("from-green-400");
+      setBgColor2("via-rose-500");
+      setBgColor3("to-green-400");
+    }
+  }, [heroInfo?.biography?.alignment]);
+
   //if (isLoading) return <p>Loading...</p>;
-
-
-  function handleClick() {
-    setSearch("cat");
-    console.log("button did a thing");
-  }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchString(event.target.value);
@@ -101,75 +153,66 @@ const DataComponent: React.FC = () => {
       return <PiMagnifyingGlassLight />
     }
   }
+
+  const handleSectionClick = (info: string) => {
+    setInfoSelection(info);
+  }
+
   return (
-    <div>
-      <h1 className="text-center my-2">Heroes & Villains </h1>
+    <div className={`bg-gradient-to-r ${bgColor1} ${bgColor2} ${bgColor3}`}>
+      <h1 className="text-center py-2">Heroes & Villains </h1>
       <div className="flex justify-center">
         <form onSubmit={handleSubmit}>
           <input type="text" 
-          className="m-2 rounded-lg text-center"
+          className="m-2 rounded-lg pl-2"
           value={searchString} 
           onChange={handleInputChange} 
           placeholder=" Hero search"/>
           <button 
           className="bg-white rounded-full p-1"
-          type="submit"><SearchIcon></SearchIcon></button>
-          
+          type="submit"><SearchIcon></SearchIcon>
+          </button>
         </form>
       </div>
-        <div className="overflow-scroll mt-4">
-          <ul className='flex row scroll-smooth text-center'>
-            {heroes.map(hero => 
-            <li 
-              key={hero.id} 
-              className="column mx-2 flex-none" 
-              onClick={() => setSearch(hero.name)} >
-                <img className="w-auto h-40 rounded-full" src={hero.image.url}/>{hero.name}
-              </li>)}
-          </ul>
+      <div className="overflow-scroll">
+        <ul className='flex scroll-smooth text-center p-4 my-4'>
+          {heroes.map(hero => 
+          <li 
+            key={hero.id} 
+            className="column mx-2 flex-none transition-transform transform hover:scale-125" 
+            onClick={() => setSearchId(hero.id)} >
+              <div className="size-32 rounded-full overflow-hidden">
+                <img className="content-cover" src={hero.image.url}/>
+              </div>
+              {hero.name}
+            </li>)}
+        </ul>
+      </div>
+      <div className="text-center text-3xl font-bold">
+        {heroInfo.name}
+      </div>
+      <div className="flex flex-row md: flex-wrap wrap justify-center m-3">
+        <div>
+          <img src={heroInfo?.image?.url} className="w-72 h-full justify-center mx-1" />
         </div>
+        <div className="p-2 mx-1">
+          <div className="flex flex-row">
+            <div className="w-1/3 text-center mx-0.5 rounded-lg border-2 border-black bg-blue-200 hover:bg-blue-400" onClick={() => handleSectionClick("description")} >Description
+            </div>
+            <div className="w-1/3 text-center mx-0.5 rounded-lg border-2 border-black bg-blue-200 hover:bg-blue-400" onClick={() => handleSectionClick("stats")}>Stats
+            </div>
+            <div className="w-1/3 text-center mx-0.5 rounded-lg border-2 border-black bg-blue-200 hover:bg-blue-400" onClick={() => handleSectionClick("background")}>Background
+            </div>
+          </div>
+          <HeroInformation selection={infoSelection} heroInfo={heroInfo}/>
+          {/* {heroInfo?.biography && <text>{heroInfo.biography["full-name"]}</text>} */}
+        </div>
+      </div>
 
 
-      {/* <ul>    
-        {(Array.isArray(items)) && items.map(item => (
-          <>
-            <li key={item.id} className="text-xl font-bold italic text-center mb-4">Name: {item.name} ({item.biography.aliases[0]})</li>
-            <img key={item.id} className="rounded-full shadow-2xl size-1/3 justify-center" src={item.image.url} />
-            <li key={item.id}>Strength: {item.powerstats.strength}</li>
-            <li key={item.id}>Intelligence: {item.powerstats.intelligence}</li>
-          </>
-        ))}
-      </ul> */}
+
     </div>
   );
 };
 
 export default DataComponent;
-
-// let heroid = 73;
-// export default async function Home() {
-//  fetch(`https://www.superheroapi.com/api.php/a34d3ae98eaa808e2d1975f5382ed007/${heroid}`).then(response => {
-//   if (!response.ok) {
-//     throw new Error('Network response was not ok');
-//   }
-//   return response.json();
-//  })
-//  .then(data => {
-//   const heroName = data.name;
-//   const hero_Id = data.id;
-//   const heroImage = data.image.url;
-//   outputElement.innerHTML = ``
-//  })
-
-//   return (
-//     <>
-//       <h1>Heroes</h1>
-//       <ul>
-//         <li>{hero_Id}</li>
-//         <li>{heroName}</li>
-//         <li>{hero.powerstats.strength}</li>
-//         <img src={heroImage} />
-//       </ul>
-//     </>
-//   );
-// }
