@@ -1,19 +1,22 @@
 //Making responsive designs with Tailwind - flex none
 //Rounded input field cutting off first letter - add padding to element
-//How to keep API call server side with useState/useEffect being client side?
 //Remove/style scrollbar- hidden with a style in globalcss
+//How to keep API call server side with useState/useEffect being client side?
 //Change class components to functional components - icons?
 //serach icon adjustment - absolute positioning?
 //Tailwind shorthand intellisense showing up?
 //Componentize elements
-//Handle searching names that aren't included
 //Using variables in a className? - pass an object with string interpolation
 //Colors for background gradient - aesthetic?
 //Currently grabbing previous hero's aligment for display - useEffect hook updating on alignment
 //Aesthetic improvements?
 //What should be inside of DataComponent?
-//Sizing not working? i.e. 1/2?
+//Sizing not working? i.e. 1/2 - define absolute units.
 //Bolding part of text, not tailwindy?
+//Center list of heroes? - look at the right component.
+//Sidescolling options/appearance?
+// How to type props for components correctly?
+// Handle searching names that aren't included - conditionally render heroes
 
 'use client'
 
@@ -37,12 +40,24 @@ interface HeroInfo {
     publisher: string;
     alignment: string;
   }
+  appearance: {
+      gender: string;
+      race: string;
+      height: string[];
+      weight: string[];
+      "eye-color": string;
+      "hair-color": string;
+  }
   id: number;
   name: string;
   image: {
     url: string;
   }
 }
+
+// const HeroInformation: React.FC<HeroInformationProps> = ({ selection, heroInfo}) => {
+//   return <div>HeroInformation</div>
+// }
 
 //let heroSearch = "batman";
 const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007";
@@ -61,15 +76,6 @@ const DataComponent: React.FC = () => {
   const [bgColor2, setBgColor2] = useState<string>("via-yellow-200");
   const [bgColor3, setBgColor3] = useState<string>("to-blue-100");
   const [infoSelection, setInfoSelection] = useState<string>("description");
-  
-  const searchHeroes = (searchValue: string) => {
-    if (searchValue === null || searchValue === "") {
-      setSearch("a")
-    } else {
-      setSearch(searchValue)
-    }
-    console.log(searchValue)
-  }
 
   //Search Hero Pool
   useEffect(() => {
@@ -144,7 +150,7 @@ const DataComponent: React.FC = () => {
     if (searchString === null || searchString === "") {
       console.log("No search Parameter set");
     } else {
-    setSearch(searchString);
+    setSearch(searchString.trim());
     }
   }
 
@@ -169,13 +175,14 @@ const DataComponent: React.FC = () => {
           onChange={handleInputChange} 
           placeholder=" Hero search"/>
           <button 
-          className="bg-white rounded-full p-1"
+          className="bg-white rounded-full p-1 relative top-0.5"
           type="submit"><SearchIcon></SearchIcon>
           </button>
         </form>
       </div>
       <div className="overflow-scroll">
-        <ul className='flex scroll-smooth text-center p-4 my-4'>
+        <ul className='flex scroll-smooth text-center p-4 my-4 justify-center'>
+{/* check for heroes with && or nice default text */}
           {heroes.map(hero => 
           <li 
             key={hero.id} 
@@ -195,7 +202,7 @@ const DataComponent: React.FC = () => {
         <div>
           <img src={heroInfo?.image?.url} className="w-72 h-full justify-center mx-1" />
         </div>
-        <div className="p-2 mx-1">
+        <div className="p-2 mx-1 w-96">
           <div className="flex flex-row">
             <div className="w-1/3 text-center mx-0.5 rounded-lg border-2 border-black bg-blue-200 hover:bg-blue-400" onClick={() => handleSectionClick("description")} >Description
             </div>
