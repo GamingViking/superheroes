@@ -32,8 +32,11 @@
 //stat bar crunching on smaller window size - Space after : from icon?
 //Handle exceptions for stats (when not given - Frigga)
 //Conditional render check against specific fields in the object in question
-//Separate aliases with a comma
-//different page for tsx type declarations?
+//Separate aliases with a comma - state altering solution for this?
+//different page for tsx type declarations
+//Separate/abstract logic so that not too much is in one component (separate components for each building block/display piece)
+//cacheing in various forms? - cache 
+//Add scrollview for components with too much info (background)
 
 'use client'
 
@@ -193,9 +196,10 @@ const DataComponent: React.FC = () => {
 
   useEffect(() => {
     const aliasString = "";
-    heroInfo?.biography?.aliases.forEach(element => {
-      setaliases(element + ", ");
-    });
+    // heroInfo?.biography?.aliases.forEach(element => {
+    //   setaliases(element + ", ");
+    // });
+    setaliases(heroInfo?.biography?.aliases.join(", "));
   }, [heroInfo?.biography])
 
   //if (isLoading) return <p>Loading...</p>;
