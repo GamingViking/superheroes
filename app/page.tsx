@@ -1,22 +1,39 @@
 //Making responsive designs with Tailwind - flex none
 //Rounded input field cutting off first letter - add padding to element
 //Remove/style scrollbar- hidden with a style in globalcss
+//serach icon adjustment - relative positioning
+//Tailwind shorthand intellisense showing up - add spaces, hope for the best
+// Handle searching names that aren't included - conditionally render heroes (turnary operator of &&)
+//Using variables in a className? - pass an object with string interpolation
+//Currently grabbing previous hero's aligment for display - useEffect hook updating on alignment
+//Sizing not working? i.e. 1/2 - define absolute units.
+
 //How to keep API call server side with useState/useEffect being client side?
 //Change class components to functional components - icons?
-//serach icon adjustment - absolute positioning?
-//Tailwind shorthand intellisense showing up?
 //Componentize elements
-//Using variables in a className? - pass an object with string interpolation
-//Colors for background gradient - aesthetic?
-//Currently grabbing previous hero's aligment for display - useEffect hook updating on alignment
 //Aesthetic improvements?
 //What should be inside of DataComponent?
-//Sizing not working? i.e. 1/2 - define absolute units.
 //Bolding part of text, not tailwindy?
 //Center list of heroes? - look at the right component.
 //Sidescolling options/appearance?
-// How to type props for components correctly?
-// Handle searching names that aren't included - conditionally render heroes
+//How to type props for components correctly?
+//Hiding API key in github? Best way to deploy?
+//Binding box around content for web deployment #aesthetics
+//Variable scale of power level displayed?
+//add variable before setting function in API fetch for HeroInfo with parseInt (i.e. line 155-156)
+//stat name appearing over gray section of bar - setting position absolute/relative sets a new z-index stack
+
+
+//Add box enclosing data for aesthetics (for large screens only?)
+//passing an icon as a prop?
+//Transparent div to block out content?
+//Carousel/infinitely scrolling selection? - intersection observer API? determine element visibility threshold
+//One useEffect for all stats?
+//stat bar crunching on smaller window size - Space after : from icon?
+//Handle exceptions for stats (when not given - Frigga)
+//Conditional render check against specific fields in the object in question
+//Separate aliases with a comma
+//different page for tsx type declarations?
 
 'use client'
 
@@ -25,7 +42,14 @@ import { PiMagnifyingGlassLight } from "react-icons/pi";
 import HeroInformation from './components/heroinformation';
 
 interface HeroData {
-  powerstats: number[];
+powerstats: {
+  intelligence: string;
+  strength: string;
+  speed: string;
+  durability: string;
+  power: string;
+  combat: string;
+}
   id: number;
   name: string;
   image: {
@@ -34,11 +58,30 @@ interface HeroData {
 }
 
 interface HeroInfo {
-  powerstats: number[];
+  powerstats: {
+      intelligence: string;
+      strength: string;
+      speed: string;
+      durability: string;
+      power: string;
+      combat: string;
+  }
   biography: {
     "full-name": string;
     publisher: string;
     alignment: string;
+    "place-of-birth": string;
+    "first-appearance": string;
+    "alter-egos": string;
+    aliases: string[];
+  }
+  work: {
+      occupation: string;
+      base: string;
+  }
+  connections: {
+      "group-affiliation": string;
+      relatives: string;
   }
   appearance: {
       gender: string;
@@ -55,15 +98,7 @@ interface HeroInfo {
   }
 }
 
-// const HeroInformation: React.FC<HeroInformationProps> = ({ selection, heroInfo}) => {
-//   return <div>HeroInformation</div>
-// }
-
-//let heroSearch = "batman";
 const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007";
-// let bgColor1 = "from-blue-100";
-// let bgColor2 = "via-yellow-200";
-// let bgColor3 = "to-blue-100";
 
 const DataComponent: React.FC = () => {
   const [heroes, setHeroes] = useState<HeroData[]>([]);
@@ -76,6 +111,13 @@ const DataComponent: React.FC = () => {
   const [bgColor2, setBgColor2] = useState<string>("via-yellow-200");
   const [bgColor3, setBgColor3] = useState<string>("to-blue-100");
   const [infoSelection, setInfoSelection] = useState<string>("description");
+  const [intelligence, setintelligence] = useState<number>(0);
+  const [strength, setstrength] = useState<number>(0);
+  const [speed, setspeed] = useState<number>(0);
+  const [durability, setdurability] = useState<number>(0);
+  const [power, setpower] = useState<number>(0);
+  const [combat, setcombat] = useState<number>(0);
+  const [aliases, setaliases] = useState<string>("");
 
   //Search Hero Pool
   useEffect(() => {
@@ -138,6 +180,24 @@ const DataComponent: React.FC = () => {
     }
   }, [heroInfo?.biography?.alignment]);
 
+  useEffect(() => {
+    setintelligence(parseInt(heroInfo?.powerstats?.intelligence));
+    setstrength(parseInt(heroInfo?.powerstats?.strength));
+    setspeed(parseInt(heroInfo?.powerstats?.speed));
+    setdurability(parseInt(heroInfo?.powerstats?.durability));
+    setpower(parseInt(heroInfo?.powerstats?.power));
+    setcombat(parseInt(heroInfo?.powerstats?.combat));
+    console.log("intelligence is ", intelligence);
+    console.log("strength is ", strength);
+  }, [heroInfo?.powerstats])
+
+  useEffect(() => {
+    const aliasString = "";
+    heroInfo?.biography?.aliases.forEach(element => {
+      setaliases(element + ", ");
+    });
+  }, [heroInfo?.biography])
+
   //if (isLoading) return <p>Loading...</p>;
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -182,8 +242,7 @@ const DataComponent: React.FC = () => {
       </div>
       <div className="overflow-scroll">
         <ul className='flex scroll-smooth text-center p-4 my-4 justify-center'>
-{/* check for heroes with && or nice default text */}
-          {heroes.map(hero => 
+          {heroes ? heroes.map(hero => 
           <li 
             key={hero.id} 
             className="column mx-2 flex-none transition-transform transform hover:scale-125" 
@@ -192,7 +251,7 @@ const DataComponent: React.FC = () => {
                 <img className="content-cover" src={hero.image.url}/>
               </div>
               {hero.name}
-            </li>)}
+            </li>) : <text>No heroes or villains by that name found</text>}
         </ul>
       </div>
       <div className="text-center text-3xl font-bold">
@@ -211,7 +270,7 @@ const DataComponent: React.FC = () => {
             <div className="w-1/3 text-center mx-0.5 rounded-lg border-2 border-black bg-blue-200 hover:bg-blue-400" onClick={() => handleSectionClick("background")}>Background
             </div>
           </div>
-          <HeroInformation selection={infoSelection} heroInfo={heroInfo}/>
+          <HeroInformation selection={infoSelection} heroInfo={heroInfo} intelligence={intelligence} strength={strength} speed={speed} durability={durability} power={power} combat={combat} aliases={aliases}/>
           {/* {heroInfo?.biography && <text>{heroInfo.biography["full-name"]}</text>} */}
         </div>
       </div>
