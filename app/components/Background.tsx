@@ -1,5 +1,4 @@
 import React from "react";
-import HeroInfo from "../Interfaces/HeroInfoInterface";
 import HeroInfoPassingProps from "../Interfaces/HeroInfoPassingProps";
 
 const Background: React.FC<HeroInfoPassingProps> = ({ heroInfo }) => {

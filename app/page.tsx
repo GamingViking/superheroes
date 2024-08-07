@@ -39,6 +39,7 @@
 //Write unit tests (aka learn how to write unit tests)
 //get code into a test environment (some type of production build - can make url hard to access)
 //Add scrollview for components with too much info? (background)
+//HeroInfoPassingProps interface for passing props?
 
 'use client'
 
@@ -46,22 +47,7 @@ import React, { useEffect, useState, FormEvent } from 'react';
 import { PiMagnifyingGlassLight } from "react-icons/pi";
 import HeroInformation from './components/heroinformation';
 import HeroInfo from './Interfaces/HeroInfoInterface';
-
-interface HeroData {
-powerstats: {
-  intelligence: string;
-  strength: string;
-  speed: string;
-  durability: string;
-  power: string;
-  combat: string;
-}
-  id: number;
-  name: string;
-  image: {
-    url: string;
-  }
-}
+import HeroData from './Interfaces/HeroDataInterface';
 
 const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007";
 
