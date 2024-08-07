@@ -35,14 +35,17 @@
 //Separate aliases with a comma - state altering solution for this?
 //different page for tsx type declarations
 //Separate/abstract logic so that not too much is in one component (separate components for each building block/display piece)
-//cacheing in various forms? - cache 
-//Add scrollview for components with too much info (background)
+//caching in various forms? - cache main page with a third party application like Redis (likely overkill for a single page)
+//Write unit tests (aka learn how to write unit tests)
+//get code into a test environment (some type of production build - can make url hard to access)
+//Add scrollview for components with too much info? (background)
 
 'use client'
 
 import React, { useEffect, useState, FormEvent } from 'react';
 import { PiMagnifyingGlassLight } from "react-icons/pi";
 import HeroInformation from './components/heroinformation';
+import HeroInfo from './Interfaces/HeroInfoInterface';
 
 interface HeroData {
 powerstats: {
@@ -53,47 +56,6 @@ powerstats: {
   power: string;
   combat: string;
 }
-  id: number;
-  name: string;
-  image: {
-    url: string;
-  }
-}
-
-interface HeroInfo {
-  powerstats: {
-      intelligence: string;
-      strength: string;
-      speed: string;
-      durability: string;
-      power: string;
-      combat: string;
-  }
-  biography: {
-    "full-name": string;
-    publisher: string;
-    alignment: string;
-    "place-of-birth": string;
-    "first-appearance": string;
-    "alter-egos": string;
-    aliases: string[];
-  }
-  work: {
-      occupation: string;
-      base: string;
-  }
-  connections: {
-      "group-affiliation": string;
-      relatives: string;
-  }
-  appearance: {
-      gender: string;
-      race: string;
-      height: string[];
-      weight: string[];
-      "eye-color": string;
-      "hair-color": string;
-  }
   id: number;
   name: string;
   image: {
