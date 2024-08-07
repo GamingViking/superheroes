@@ -38,18 +38,21 @@
 //caching in various forms? - cache main page with a third party application like Redis (likely overkill for a single page)
 //Write unit tests (aka learn how to write unit tests)
 //get code into a test environment (some type of production build - can make url hard to access)
-//Add scrollview for components with too much info? (background)
+//Add scrollview for components with too much info? (background) - no scroll for small screens?
 //HeroInfoPassingProps interface for passing props?
 //SearchBarPropsInterface => void functions?
+//Bind HeroList so it stays on screen
 
 'use client'
 
-import React, { useEffect, useState, FormEvent } from 'react';
-import HeroInformation from './components/heroinformation';
+import React, { useEffect, useState } from 'react';
+import HeroInformation from './components/HeroInformation';
 import HeroInfo from './Interfaces/HeroInfoInterface';
 import HeroData from './Interfaces/HeroDataInterface';
 import Title from './components/Title';
 import SearchBar from './components/SearchBar';
+import HeroList from './components/HeroList';
+import HeroName from './components/HeroName';
 
 const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007";
 
@@ -162,27 +165,13 @@ const DataComponent: React.FC = () => {
     <div className={`bg-gradient-to-r ${bgColor1} ${bgColor2} ${bgColor3}`}>
       <Title/>
       <SearchBar search={search} setSearch={setSearch} searchString={searchString} setSearchString={setSearchString}/>
-      <div className="overflow-scroll">
-        <ul className='flex scroll-smooth text-center p-4 my-4 justify-center'>
-          {heroes ? heroes.map(hero => 
-          <li 
-            key={hero.id} 
-            className="column mx-2 flex-none transition-transform transform hover:scale-125" 
-            onClick={() => setSearchId(hero.id)} >
-              <div className="size-32 rounded-full overflow-hidden">
-                <img className="content-cover" src={hero.image.url}/>
-              </div>
-              {hero.name}
-            </li>) : <text>No heroes or villains by that name found</text>}
-        </ul>
-      </div>
-      <div className="text-center text-3xl font-bold">
-        {heroInfo.name}
-      </div>
+      <HeroList heroes={heroes} setSearchId={setSearchId}/>
+      <HeroName heroInfo={heroInfo}/>
       <div className="flex flex-row md: flex-wrap wrap justify-center m-3">
         <div>
           <img src={heroInfo?.image?.url} className="w-72 h-full justify-center mx-1" />
         </div>
+
         <div className="p-2 mx-1 w-96">
           <div className="flex flex-row">
             <div className="w-1/3 text-center mx-0.5 rounded-lg border-2 border-black bg-blue-200 hover:bg-blue-400" onClick={() => handleSectionClick("description")} >Description
@@ -195,6 +184,7 @@ const DataComponent: React.FC = () => {
           <HeroInformation selection={infoSelection} heroInfo={heroInfo} intelligence={intelligence} strength={strength} speed={speed} durability={durability} power={power} combat={combat} aliases={aliases}/>
           {/* {heroInfo?.biography && <text>{heroInfo.biography["full-name"]}</text>} */}
         </div>
+
       </div>
     </div>
   );

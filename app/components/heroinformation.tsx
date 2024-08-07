@@ -10,8 +10,7 @@ import Description from "./Description";
 import Background from "./Background";
 import HeroInformationProps from "../Interfaces/HeroInformationPropsInterface";
     
-    export default function HeroInformation({selection, heroInfo, intelligence, strength, speed, durability, power, combat, aliases }:HeroInformationProps) {
-
+const HeroInformation: React.FC<HeroInformationProps> = ({selection, heroInfo, intelligence, strength, speed, durability, power, combat, aliases }:HeroInformationProps) => {
     if (selection === "description") {
         return (
             <Description heroInfo={heroInfo} aliases={aliases}/>
@@ -41,3 +40,5 @@ import HeroInformationProps from "../Interfaces/HeroInformationPropsInterface";
         );
     }
 }
+
+export default HeroInformation;
