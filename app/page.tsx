@@ -40,14 +40,16 @@
 //get code into a test environment (some type of production build - can make url hard to access)
 //Add scrollview for components with too much info? (background)
 //HeroInfoPassingProps interface for passing props?
+//SearchBarPropsInterface => void functions?
 
 'use client'
 
 import React, { useEffect, useState, FormEvent } from 'react';
-import { PiMagnifyingGlassLight } from "react-icons/pi";
 import HeroInformation from './components/heroinformation';
 import HeroInfo from './Interfaces/HeroInfoInterface';
 import HeroData from './Interfaces/HeroDataInterface';
+import Title from './components/Title';
+import SearchBar from './components/SearchBar';
 
 const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007";
 
@@ -152,46 +154,14 @@ const DataComponent: React.FC = () => {
 
   //if (isLoading) return <p>Loading...</p>;
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchString(event.target.value);
-    console.log(searchString);
-  }
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (searchString === null || searchString === "") {
-      console.log("No search Parameter set");
-    } else {
-    setSearch(searchString.trim());
-    }
-  }
-
-  class SearchIcon extends React.Component {
-    render() {
-      return <PiMagnifyingGlassLight />
-    }
-  }
-
   const handleSectionClick = (info: string) => {
     setInfoSelection(info);
   }
 
   return (
     <div className={`bg-gradient-to-r ${bgColor1} ${bgColor2} ${bgColor3}`}>
-      <h1 className="text-center py-2">Heroes & Villains </h1>
-      <div className="flex justify-center">
-        <form onSubmit={handleSubmit}>
-          <input type="text" 
-          className="m-2 rounded-lg pl-2"
-          value={searchString} 
-          onChange={handleInputChange} 
-          placeholder=" Hero search"/>
-          <button 
-          className="bg-white rounded-full p-1 relative top-0.5"
-          type="submit"><SearchIcon></SearchIcon>
-          </button>
-        </form>
-      </div>
+      <Title/>
+      <SearchBar search={search} setSearch={setSearch} searchString={searchString} setSearchString={setSearchString}/>
       <div className="overflow-scroll">
         <ul className='flex scroll-smooth text-center p-4 my-4 justify-center'>
           {heroes ? heroes.map(hero => 
@@ -226,9 +196,6 @@ const DataComponent: React.FC = () => {
           {/* {heroInfo?.biography && <text>{heroInfo.biography["full-name"]}</text>} */}
         </div>
       </div>
-
-
-
     </div>
   );
 };

@@ -13,7 +13,7 @@ const Description: React.FC<DescriptionProps> = ({ heroInfo, aliases }) => {
             <div>
                 {heroInfo?.biography && <text><strong>Aliases: </strong>{aliases}</text>}
             </div>
-            <div className="flex flex-row">            
+            <div className="flex flex-row mt-5">            
                 <div className="flex-col basis-1/2 bg-red-400">
                     <div>
                         <strong>Gender:</strong> {heroInfo?.appearance?.gender}
