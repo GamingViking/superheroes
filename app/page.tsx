@@ -53,6 +53,7 @@ import Title from './components/Title';
 import SearchBar from './components/SearchBar';
 import HeroList from './components/HeroList';
 import HeroName from './components/HeroName';
+import HeroInfoContainer from './components/HeroInfoContainer';
 
 const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007";
 
@@ -66,7 +67,7 @@ const DataComponent: React.FC = () => {
   const [bgColor1, setBgColor1] = useState<string>("from-blue-100");
   const [bgColor2, setBgColor2] = useState<string>("via-yellow-200");
   const [bgColor3, setBgColor3] = useState<string>("to-blue-100");
-  const [infoSelection, setInfoSelection] = useState<string>("description");
+  // const [infoSelection, setInfoSelection] = useState<string>("description");
   const [intelligence, setintelligence] = useState<number>(0);
   const [strength, setstrength] = useState<number>(0);
   const [speed, setspeed] = useState<number>(0);
@@ -157,35 +158,13 @@ const DataComponent: React.FC = () => {
 
   //if (isLoading) return <p>Loading...</p>;
 
-  const handleSectionClick = (info: string) => {
-    setInfoSelection(info);
-  }
-
   return (
     <div className={`bg-gradient-to-r ${bgColor1} ${bgColor2} ${bgColor3}`}>
       <Title/>
       <SearchBar search={search} setSearch={setSearch} searchString={searchString} setSearchString={setSearchString}/>
       <HeroList heroes={heroes} setSearchId={setSearchId}/>
       <HeroName heroInfo={heroInfo}/>
-      <div className="flex flex-row md: flex-wrap wrap justify-center m-3">
-        <div>
-          <img src={heroInfo?.image?.url} className="w-72 h-full justify-center mx-1" />
-        </div>
-
-        <div className="p-2 mx-1 w-96">
-          <div className="flex flex-row">
-            <div className="w-1/3 text-center mx-0.5 rounded-lg border-2 border-black bg-blue-200 hover:bg-blue-400" onClick={() => handleSectionClick("description")} >Description
-            </div>
-            <div className="w-1/3 text-center mx-0.5 rounded-lg border-2 border-black bg-blue-200 hover:bg-blue-400" onClick={() => handleSectionClick("stats")}>Stats
-            </div>
-            <div className="w-1/3 text-center mx-0.5 rounded-lg border-2 border-black bg-blue-200 hover:bg-blue-400" onClick={() => handleSectionClick("background")}>Background
-            </div>
-          </div>
-          <HeroInformation selection={infoSelection} heroInfo={heroInfo} intelligence={intelligence} strength={strength} speed={speed} durability={durability} power={power} combat={combat} aliases={aliases}/>
-          {/* {heroInfo?.biography && <text>{heroInfo.biography["full-name"]}</text>} */}
-        </div>
-
-      </div>
+      <HeroInfoContainer heroInfo={heroInfo} intelligence={intelligence} strength={strength} speed={speed} durability={durability} power={power} combat={combat} aliases={aliases}/>
     </div>
   );
 };

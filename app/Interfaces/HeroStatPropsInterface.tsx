@@ -1,7 +1,6 @@
 import HeroInfo from "./HeroInfoInterface";
 
-interface HeroInformationProps {
-    selection: string;
+interface HeroStatProps {
     heroInfo: HeroInfo;
     intelligence: number;
     strength: number;
@@ -12,4 +11,4 @@ interface HeroInformationProps {
     aliases: string;
   }
 
-  export default HeroInformationProps;
+  export default HeroStatProps;

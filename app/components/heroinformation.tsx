@@ -8,9 +8,9 @@ import { BsBarChartLine } from "react-icons/bs";
 import Powerstat from "./Powerstat";
 import Description from "./Description";
 import Background from "./Background";
-import HeroInformationProps from "../Interfaces/HeroInformationPropsInterface";
+import HeroInformationProps from "../Interfaces/HeroInformationProps";
     
-const HeroInformation: React.FC<HeroInformationProps> = ({selection, heroInfo, intelligence, strength, speed, durability, power, combat, aliases }:HeroInformationProps) => {
+const HeroInformation: React.FC<HeroInformationProps> = ({ selection, heroInfo, intelligence, strength, speed, durability, power, combat, aliases }) => {
     if (selection === "description") {
         return (
             <Description heroInfo={heroInfo} aliases={aliases}/>
