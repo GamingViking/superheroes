@@ -16,12 +16,12 @@ const HeroInfoContainer: React.FC<HeroInfoContainerProps> = ({ heroInfo, aliases
             <img src={heroInfo?.image?.url} className="w-72 h-full justify-center mx-1" />
             </div>
             <div className="p-2 mx-1 w-96">
-            <div className="flex flex-row">
-                <InfoButton handleSectionClick={handleSectionClick} selection="Description"/>
-                <InfoButton handleSectionClick={handleSectionClick} selection="Stats"/>
-                <InfoButton handleSectionClick={handleSectionClick} selection="Background"/>
-            </div>
-            <HeroInformation selection={infoSelection} heroInfo={heroInfo} intelligence={intelligence} strength={strength} speed={speed} durability={durability} power={power} combat={combat} aliases={aliases}/>
+                <div className="flex flex-row">
+                    <InfoButton handleSectionClick={handleSectionClick} selection="Description"/>
+                    <InfoButton handleSectionClick={handleSectionClick} selection="Stats"/>
+                    <InfoButton handleSectionClick={handleSectionClick} selection="Background"/>
+                </div>
+                <HeroInformation selection={infoSelection} heroInfo={heroInfo} intelligence={intelligence} strength={strength} speed={speed} durability={durability} power={power} combat={combat} aliases={aliases}/>
             </div>
         </div>
     );

@@ -41,11 +41,15 @@
 //Add scrollview for components with too much info? (background) - no scroll for small screens?
 //HeroInfoPassingProps interface for passing props?
 //Bind HeroList so it stays on screen
+//starting heroes cut off if using an incomplete name search, i.e. search "o"
+//Hero list starts at the same scroll location with different searches
+//Hero stat NAN on a different line from icon for mobile (CatII)
+//pass props more efficiently - not individuall named (article - spread operator?)
+//Media query size differences for mobile, normal, and large screens?
 
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import HeroInformation from './components/HeroInformation';
 import HeroInfo from './Interfaces/HeroInfoInterface';
 import HeroData from './Interfaces/HeroDataInterface';
 import Title from './components/Title';
