@@ -11,11 +11,11 @@ import Background from "./Background";
 import HeroInformationProps from "../Interfaces/HeroInformationProps";
     
 const HeroInformation: React.FC<HeroInformationProps> = ({ selection, heroInfo, intelligence, strength, speed, durability, power, combat, aliases }) => {
-    if (selection === "description") {
+    if (selection === "Description") {
         return (
             <Description heroInfo={heroInfo} aliases={aliases}/>
         );
-    } else if (selection === "stats") {
+    } else if (selection === "Stats") {
         return (
             <div className="mt-4">
                 <Powerstat powerstat={intelligence} statname="intelligence" icon={<LuBrain className="mt-2"/>}/>
@@ -27,7 +27,7 @@ const HeroInformation: React.FC<HeroInformationProps> = ({ selection, heroInfo, 
                 <Powerstat powerstat={Math.round((intelligence + strength + speed + durability + power + combat) / 6)} statname="average" icon={<BsBarChartLine className="mt-2"/>}/>
             </div>
         );
-    } else if (selection === "background") {
+    } else if (selection === "Background") {
         return (
             <Background heroInfo={heroInfo}/>
         );

@@ -40,7 +40,6 @@
 //get code into a test environment (some type of production build - can make url hard to access)
 //Add scrollview for components with too much info? (background) - no scroll for small screens?
 //HeroInfoPassingProps interface for passing props?
-//SearchBarPropsInterface => void functions?
 //Bind HeroList so it stays on screen
 
 'use client'
@@ -67,7 +66,6 @@ const DataComponent: React.FC = () => {
   const [bgColor1, setBgColor1] = useState<string>("from-blue-100");
   const [bgColor2, setBgColor2] = useState<string>("via-yellow-200");
   const [bgColor3, setBgColor3] = useState<string>("to-blue-100");
-  // const [infoSelection, setInfoSelection] = useState<string>("description");
   const [intelligence, setintelligence] = useState<number>(0);
   const [strength, setstrength] = useState<number>(0);
   const [speed, setspeed] = useState<number>(0);
