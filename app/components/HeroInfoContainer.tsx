@@ -11,11 +11,11 @@ const HeroInfoContainer: React.FC<HeroInfoContainerProps> = ({ heroInfo, aliases
       }
 
     return(
-        <div className="flex flex-row md: flex-wrap wrap justify-center m-3">
+        <div className="flex flex-row md: flex-wrap wrap justify-center m-3 bg-[#5a2158] border-2 border-[#09040b] rounded-lg">
             <div>
             <img src={heroInfo?.image?.url} className="w-72 h-full justify-center mx-1" />
             </div>
-            <div className="p-2 mx-1 w-96">
+            <div className="p-2 mx-1 w-96 text-white">
                 <div className="flex flex-row">
                     <InfoButton handleSectionClick={handleSectionClick} selection="Description"/>
                     <InfoButton handleSectionClick={handleSectionClick} selection="Stats"/>

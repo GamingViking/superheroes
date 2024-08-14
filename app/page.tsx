@@ -40,12 +40,17 @@
 //get code into a test environment (some type of production build - can make url hard to access)
 //Add scrollview for components with too much info? (background) - no scroll for small screens?
 //HeroInfoPassingProps interface for passing props?
+//center shift to scroll message - left margin and -50% x translation
 //Bind HeroList so it stays on screen
 //starting heroes cut off if using an incomplete name search, i.e. search "o"
 //Hero list starts at the same scroll location with different searches
 //Hero stat NAN on a different line from icon for mobile (CatII)
-//pass props more efficiently - not individuall named (article - spread operator?)
+//pass props more efficiently - not individually named (article - spread operator?)
 //Media query size differences for mobile, normal, and large screens?
+//Add custom colors to tailwind library for convenient/repeated use
+//Extract left/right scroll arrows into separate components?
+//Change amount of color distribution in background gradient?
+//Find a different way to position shift + Mousewheel message (top-[292])
 
 'use client'
 
@@ -121,21 +126,21 @@ const DataComponent: React.FC = () => {
   useEffect(() => {
     console.log(heroInfo?.biography?.alignment)
     if (heroInfo?.biography?.alignment === "good") {
-      setBgColor1("from-blue-100");
-      setBgColor2("via-gray-100");
-      setBgColor3("to-blue-100");
+      setBgColor1("from-[#0070a2]");
+      setBgColor2("via-[#0ed0dc]");
+      setBgColor3("to-[#0070a2]");
     } else if (heroInfo?.biography?.alignment === "neutral") {
-      setBgColor1("from-orange-100");
-      setBgColor2("via-gray-100");
-      setBgColor3("to-orange-100");
+      setBgColor1("from-[#0ed0dc]");
+      setBgColor2("via-[#ff73b0]");
+      setBgColor3("to-[#0ed0dc]");
     } else if (heroInfo?.biography?.alignment === "bad") {
-      setBgColor1("from-red-100");
-      setBgColor2("via-gray-100");
-      setBgColor3("to-red-100");
+      setBgColor1("from-[#8e0056]");
+      setBgColor2("via-[#ff73b0]");
+      setBgColor3("to-[#8e0056]");
     } else {
-      setBgColor1("from-green-400");
-      setBgColor2("via-rose-500");
-      setBgColor3("to-green-400");
+      setBgColor1("from-[#09040b]");
+      setBgColor2("via-[#ff73b0]");
+      setBgColor3("to-[#09040b]");
     }
   }, [heroInfo?.biography?.alignment]);
 

@@ -23,15 +23,15 @@ const SearchBar: React.FC<SearchBarProps> = ({setSearch, searchString, setSearch
         }
       }
     return(
-        <div className="flex justify-center">
+      <div className="flex justify-center mb-2">
         <form onSubmit={handleSubmit}>
           <input type="text" 
-          className="m-2 rounded-lg pl-2"
+          className="m-2 rounded-lg pl-2 border-2 border-[#09040b]"
           value={searchString} 
           onChange={handleInputChange} 
           placeholder=" Hero search"/>
           <button 
-          className="bg-white rounded-full p-1 relative top-0.5"
+          className="bg-white rounded-full border-2 border-[#09040b] p-1 relative top-0.5"
           type="submit"><SearchIcon></SearchIcon>
           </button>
         </form>

@@ -9,9 +9,9 @@ const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId }) => {
     document.getElementById('content')?.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: "smooth"});
   }
     return(
-        <div className="flex justify-center">
-          <div className="flex w-1/12 justify-center" onClick={() => {handleClick("left")}}><IoIosArrowBack className="self-center size-10"/></div>
-          <div id="content" className="overflow-scroll flex w-5/6 border-2 border-[#ff73b0] rounded-lg bg-[#0ed0dc]">
+        <div className="flex justify-center mb-2">
+          <div className="flex w-1/12 justify-center transition-transform transform hover:scale-125" onClick={() => {handleClick("left")}}><IoIosArrowBack className="self-center size-10 "/></div>
+          <div id="content" className="overflow-scroll flex w-5/6 border-2 border-[#09040b] rounded-lg bg-[#5a2158] text-white">
             <ul className='flex scroll-smooth text-center p-4 my-4 justify-center'>
               {heroes ? heroes.map(hero => 
               <li 
@@ -24,8 +24,9 @@ const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId }) => {
                   {hero.name}
                 </li>) : <text>No heroes or villains by that name found</text>}
             </ul>
+            <div className="text-xs font-thin absolute w-30 left-[50%] transform translate-x-[-50%] top-[292px]">Shift + Mousewheel to scroll</div>
           </div>
-          <div className="flex w-1/12 justify-center" onClick={() => {handleClick("right")}}><IoIosArrowForward className="self-center size-10"/></div>
+          <div className="flex w-1/12 justify-center transition-transform transform hover:scale-125" onClick={() => {handleClick("right")}}><IoIosArrowForward className="self-center size-10"/></div>
         </div>
     );
 }
