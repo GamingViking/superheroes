@@ -11,7 +11,7 @@ const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId }) => {
     return(
         <div className="flex justify-center mb-2">
           <div className="flex w-1/12 justify-center transition-transform transform hover:scale-125" onClick={() => {handleClick("left")}}><IoIosArrowBack className="self-center size-10 "/></div>
-          <div id="content" className="overflow-scroll flex w-5/6 border-2 border-[#09040b] rounded-lg bg-[#5a2158] text-white">
+          <div id="content" className="overflow-scroll flex w-5/6 border-2 border-zinc-950 rounded-lg bg-fuchsia-950 text-white">
             <ul className='flex scroll-smooth text-center p-4 my-4 justify-center'>
               {heroes ? heroes.map(hero => 
               <li 

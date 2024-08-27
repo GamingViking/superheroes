@@ -47,7 +47,7 @@
 //Hero stat NAN on a different line from icon for mobile (CatII)
 //pass props more efficiently - not individually named (article - spread operator?)
 //Media query size differences for mobile, normal, and large screens?
-//Add custom colors to tailwind library for convenient/repeated use
+//Add custom colors to tailwind library for convenient/repeated use - make variables?
 //Extract left/right scroll arrows into separate components?
 //Change amount of color distribution in background gradient?
 //Find a different way to position shift + Mousewheel message (top-[292])
@@ -126,21 +126,21 @@ const DataComponent: React.FC = () => {
   useEffect(() => {
     console.log(heroInfo?.biography?.alignment)
     if (heroInfo?.biography?.alignment === "good") {
-      setBgColor1("from-[#0070a2]");
-      setBgColor2("via-[#0ed0dc]");
-      setBgColor3("to-[#0070a2]");
+      setBgColor1("from-sky-700");
+      setBgColor2("via-cyan-400");
+      setBgColor3("to-sky-700");
     } else if (heroInfo?.biography?.alignment === "neutral") {
-      setBgColor1("from-[#0ed0dc]");
-      setBgColor2("via-[#ff73b0]");
-      setBgColor3("to-[#0ed0dc]");
+      setBgColor1("from-cyan-400");
+      setBgColor2("via-pink-400");
+      setBgColor3("to-cyan-400");
     } else if (heroInfo?.biography?.alignment === "bad") {
-      setBgColor1("from-[#8e0056]");
-      setBgColor2("via-[#ff73b0]");
-      setBgColor3("to-[#8e0056]");
+      setBgColor1("from-pink-800");
+      setBgColor2("via-pink-400");
+      setBgColor3("to-pink-800");
     } else {
-      setBgColor1("from-[#09040b]");
-      setBgColor2("via-[#ff73b0]");
-      setBgColor3("to-[#09040b]");
+      setBgColor1("from-zinc-950");
+      setBgColor2("via-pink-400");
+      setBgColor3("to-zinc-950");
     }
   }, [heroInfo?.biography?.alignment]);
 

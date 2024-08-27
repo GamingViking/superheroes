@@ -11,7 +11,7 @@ const HeroInfoContainer: React.FC<HeroInfoContainerProps> = ({ heroInfo, aliases
       }
 
     return(
-        <div className="flex flex-row md: flex-wrap wrap justify-center m-3 bg-[#5a2158] border-2 border-[#09040b] rounded-lg">
+        <div className="flex flex-row md: flex-wrap wrap justify-center m-3 bg-fuchsia-950 border-2 border-zinc-950 rounded-lg">
             <div>
             <img src={heroInfo?.image?.url} className="w-72 h-full justify-center mx-1" />
             </div>
