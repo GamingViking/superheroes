@@ -7,40 +7,35 @@
 //Using variables in a className? - pass an object with string interpolation
 //Currently grabbing previous hero's aligment for display - useEffect hook updating on alignment
 //Sizing not working? i.e. 1/2 - define absolute units.
-
-//How to keep API call server side with useState/useEffect being client side?
 //Change class components to functional components - icons?
-//Componentize elements
-//Aesthetic improvements?
+//Componentize elements - for bulk components
 //What should be inside of DataComponent?
-//Bolding part of text, not tailwindy?
 //Center list of heroes? - look at the right component.
-//Sidescolling options/appearance?
-//How to type props for components correctly?
-//Hiding API key in github? Best way to deploy?
-//Binding box around content for web deployment #aesthetics
-//Variable scale of power level displayed?
-//add variable before setting function in API fetch for HeroInfo with parseInt (i.e. line 155-156)
+//Sidescolling options/appearance? - media queries/scrolling - md:overflow-y-auto
+//How to type props for components correctly? - could shorthand with specific components
+//Variable scale of power level displayed? - sick gradient overlay #z-index and variable div size
 //stat name appearing over gray section of bar - setting position absolute/relative sets a new z-index stack
-
-
-//Add box enclosing data for aesthetics (for large screens only?)
-//passing an icon as a prop?
-//Transparent div to block out content?
-//Carousel/infinitely scrolling selection? - intersection observer API? determine element visibility threshold
-//One useEffect for all stats?
-//stat bar crunching on smaller window size - Space after : from icon?
-//Handle exceptions for stats (when not given - Frigga)
-//Conditional render check against specific fields in the object in question
-//Separate aliases with a comma - state altering solution for this?
-//different page for tsx type declarations
+//handling math on stats coming from API as strings - initial interface declares as strings, parseInt into new variables with setter functions, then pass new variables as numbers via new interface
+//passing an icon as a prop? - pass whole icon as an object, declare in interface as ReactElement
+//Carousel/infinitely scrolling selection? - intersection observer API? determine element visibility threshold (instead bound the selection with non-looping scrollable component)
+//One useEffect for all stats? - now functioning as intended!
+//stat bar crunching on smaller window size (when no stats given for hero) - Space after : from icon? - enlarged containing div to account for increased size of NAN
+//Conditional render check against specific fields in the object in question - thing?.thing2["thing-3"]
+//different page for tsx type declarations - done for all but really small declarations (powerstat.tsx)
 //Separate/abstract logic so that not too much is in one component (separate components for each building block/display piece)
 //caching in various forms? - cache main page with a third party application like Redis (likely overkill for a single page)
+//Bind HeroList so it stays on screen - threw a container on it
+
+//How to keep API call server side with useState/useEffect being client side?
+//Aesthetic improvements?
+//Bolding part of text, not tailwindy?
+//Hiding API key in github? Best way to deploy?
+//Transparent div to block out content? Impossible?
+//Separate aliases with a comma - state altering solution for this? (went with a join statement)
+//HeroInfoPassingProps interface for passing props?
+
 //Write unit tests (aka learn how to write unit tests)
 //get code into a test environment (some type of production build - can make url hard to access)
-//Add scrollview for components with too much info? (background) - no scroll for small screens?
-//HeroInfoPassingProps interface for passing props?
-//Bind HeroList so it stays on screen - threw a container on it
 
 //starting heroes cut off if using an incomplete name search, i.e. search "o"
 //Hero list starts at the same scroll location with different searches
@@ -73,9 +68,9 @@ const DataComponent: React.FC = () => {
   const [search, setSearch] = useState<string>("batman");
   const [searchId, setSearchId] = useState<number>(70);
   const [heroInfo, setHeroInfo] = useState<HeroInfo>(Object);
-  const [bgColor1, setBgColor1] = useState<string>("from-blue-100");
-  const [bgColor2, setBgColor2] = useState<string>("via-yellow-200");
-  const [bgColor3, setBgColor3] = useState<string>("to-blue-100");
+  const [bgColor1, setBgColor1] = useState<string>("from-zinc-950");
+  const [bgColor2, setBgColor2] = useState<string>("via-pink-400");
+  const [bgColor3, setBgColor3] = useState<string>("to-zinc-950");
   const [intelligence, setintelligence] = useState<number>(0);
   const [strength, setstrength] = useState<number>(0);
   const [speed, setspeed] = useState<number>(0);
