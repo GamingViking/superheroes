@@ -21,7 +21,9 @@ const HeroInfoContainer: React.FC<HeroInfoContainerProps> = ({ heroInfo, aliases
                     <InfoButton handleSectionClick={handleSectionClick} selection="Stats"/>
                     <InfoButton handleSectionClick={handleSectionClick} selection="Background"/>
                 </div>
-                <HeroInformation selection={infoSelection} heroInfo={heroInfo} intelligence={intelligence} strength={strength} speed={speed} durability={durability} power={power} combat={combat} aliases={aliases}/>
+                <div className="md:max-h-[340px] md:overflow-y-auto">
+                    <HeroInformation selection={infoSelection} heroInfo={heroInfo} intelligence={intelligence} strength={strength} speed={speed} durability={durability} power={power} combat={combat} aliases={aliases}/>
+                </div>
             </div>
         </div>
     );

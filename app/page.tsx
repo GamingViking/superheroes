@@ -51,6 +51,7 @@
 //Extract left/right scroll arrows into separate components?
 //Change amount of color distribution in background gradient?
 //loading display for slower computers/(low-mid throttle)
+//Awkward pixel-specific screen size set in themes for md media query
 
 'use client'
 
