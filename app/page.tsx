@@ -40,7 +40,6 @@
 //get code into a test environment (some type of production build - can make url hard to access)
 //Add scrollview for components with too much info? (background) - no scroll for small screens?
 //HeroInfoPassingProps interface for passing props?
-//center shift to scroll message - left margin and -50% x translation
 //Bind HeroList so it stays on screen - threw a container on it
 
 //starting heroes cut off if using an incomplete name search, i.e. search "o"
@@ -51,7 +50,7 @@
 //Add custom colors to tailwind library for convenient/repeated use - make variables?
 //Extract left/right scroll arrows into separate components?
 //Change amount of color distribution in background gradient?
-//Find a different way to position shift + Mousewheel message (top-[292])
+//loading display for slower computers/(low-mid throttle)
 
 'use client'
 

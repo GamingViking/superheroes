@@ -13,6 +13,9 @@ const Description: React.FC<DescriptionProps> = ({ heroInfo, aliases }) => {
             <div>
                 {heroInfo?.biography && <text><strong>Aliases: </strong>{aliases}</text>}
             </div>
+            <div>
+                {heroInfo?.biography && <text><strong>Alignment: </strong>{heroInfo?.biography?.alignment}</text>}
+            </div>
             <div className="flex flex-row mt-5">            
                 <div className="flex-col basis-1/2">
                     <div>
