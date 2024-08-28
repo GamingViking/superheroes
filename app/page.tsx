@@ -41,7 +41,8 @@
 //Add scrollview for components with too much info? (background) - no scroll for small screens?
 //HeroInfoPassingProps interface for passing props?
 //center shift to scroll message - left margin and -50% x translation
-//Bind HeroList so it stays on screen
+//Bind HeroList so it stays on screen - threw a container on it
+
 //starting heroes cut off if using an incomplete name search, i.e. search "o"
 //Hero list starts at the same scroll location with different searches
 //Hero stat NAN on a different line from icon for mobile (CatII)
@@ -67,7 +68,7 @@ const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007";
 
 const DataComponent: React.FC = () => {
   const [heroes, setHeroes] = useState<HeroData[]>([]);
-  //const [isLoading, setLoading] = useState<boolean>(true);
+  // const [isLoading, setLoading] = useState<boolean>(true);
   const [searchString, setSearchString] = useState<string>("");
   const [search, setSearch] = useState<string>("batman");
   const [searchId, setSearchId] = useState<number>(70);
