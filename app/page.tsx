@@ -166,7 +166,7 @@ const DataComponent: React.FC = () => {
   //if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className={`bg-gradient-to-r ${bgColor1} ${bgColor2} ${bgColor3}`}>
+    <div className={`bg-gradient-to-r ${bgColor1} ${bgColor2} ${bgColor3}`} style={{paddingBottom: 10}}>
       <Title/>
       <SearchBar search={search} setSearch={setSearch} searchString={searchString} setSearchString={setSearchString}/>
       <HeroList heroes={heroes} setSearchId={setSearchId}/>
