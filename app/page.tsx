@@ -33,6 +33,7 @@
 //Transparent div to block out content? Impossible?
 //Separate aliases with a comma - state altering solution for this? (went with a join statement)
 //HeroInfoPassingProps interface for passing props?
+//Fix Shift + Mousewheel text so that it doesn't scroll - added an extra outter div, kept visual style on outter div and scrollable components on inner div, text div outside of inner div
 
 //Write unit tests (aka learn how to write unit tests)
 //get code into a test environment (some type of production build - can make url hard to access)
@@ -78,7 +79,6 @@ const DataComponent: React.FC = () => {
   const [power, setpower] = useState<number>(0);
   const [combat, setcombat] = useState<number>(0);
   const [aliases, setaliases] = useState<string>("");
-  const heroListScrollLocationRef = useRef<HTMLDivElement | null>(null);
 
   //Search Hero Pool
   useEffect(() => {
