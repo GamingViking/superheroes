@@ -50,7 +50,7 @@
 
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import HeroInfo from './Interfaces/HeroInfoInterface';
 import HeroData from './Interfaces/HeroDataInterface';
 import Title from './components/Title';
@@ -78,6 +78,7 @@ const DataComponent: React.FC = () => {
   const [power, setpower] = useState<number>(0);
   const [combat, setcombat] = useState<number>(0);
   const [aliases, setaliases] = useState<string>("");
+  const heroListScrollLocationRef = useRef<HTMLDivElement | null>(null);
 
   //Search Hero Pool
   useEffect(() => {
