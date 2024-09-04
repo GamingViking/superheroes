@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HeroInformation from "./HeroInformation";
+import HeroInformation from "./RenamedGuy";
 import HeroInfoContainerProps from "../Interfaces/HeroInfoContainerProps.tsx";
 import InfoButton from "./InfoButton";
 
