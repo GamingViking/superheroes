@@ -4,7 +4,6 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 
 const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId, isLoading }) => {
-  const scrollLocationRef = useRef(null);
   useEffect(() => {
     document.getElementById('content')?.scrollTo({left: 0})
   }, [heroes]);
@@ -39,8 +38,7 @@ const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId, isLoading }) =
             </div>
             <div className="flex text-xs font-thin justify-center">Shift + Mousewheel to scroll</div>
           </div>
-                )}
-
+          )}
           <div className="flex w-1/12 justify-center transition-transform transform hover:scale-125" onClick={() => {handleClick("right")}}><IoIosArrowForward className="self-center size-10"/></div>
         </div>
     );

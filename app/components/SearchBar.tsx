@@ -14,7 +14,6 @@ const SearchBar: React.FC<SearchBarProps> = ({setSearch, searchString, setSearch
 
       const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchString(event.target.value);
-        console.log(searchString);
       }
 
       class SearchIcon extends React.Component {
