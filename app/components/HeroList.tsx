@@ -30,7 +30,7 @@ const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId, isLoading }) =
                   className="inline-block mx-2 transition-transform transform hover:scale-125" 
                   onClick={() => setSearchId(hero.id)} >
                     <div className="size-32 rounded-full overflow-hidden">
-                      <img className="content-cover" src={hero.image.url}/>
+                      <img className="content-cover" src={hero.image.url} alt={hero.name} />
                     </div>
                     {hero.name}
                   </li>) : <text>No heroes or villains by that name found</text>}

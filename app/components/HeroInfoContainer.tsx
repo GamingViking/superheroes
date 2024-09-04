@@ -14,7 +14,7 @@ const HeroInfoContainer: React.FC<HeroInfoContainerProps> = ({ heroInfo, aliases
         <div className="flex flex-col items-center md:items-start md:justify-center md:flex-row m-3 bg-fuchsia-950 border-2 border-zinc-950 rounded-lg">
             {heroInfo?.image?.url && 
                 <div className="justify-center mx-1">
-                <img src={heroInfo?.image?.url} className="object-cover w-72 h-96" />
+                <img src={heroInfo?.image?.url} alt={heroInfo.name} className="object-cover w-72 h-96" />
                 </div>} 
             <div className="p-2 mx-1 w-96 text-white">
                 <div className="flex flex-row">
