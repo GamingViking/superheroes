@@ -60,7 +60,7 @@ import HeroList from './components/HeroList';
 import HeroName from './components/HeroName';
 import HeroInfoContainer from './components/HeroInfoContainer';
 
-const API_KEY = "a34d3ae98eaa808e2d1975f5382ed007";
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 const DataComponent: React.FC = () => {
   const [heroes, setHeroes] = useState<HeroData[]>([]);
