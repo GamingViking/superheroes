@@ -1,11 +1,6 @@
 
 import React, { ReactElement } from "react";
-
-type PowerstatProps = {
-    powerstat: number;
-    statname: string;
-    icon: ReactElement;
-};
+import PowerstatProps from "../Interfaces/PowerstatProps";
 
 const Powerstat: React.FC<PowerstatProps> = ({ powerstat, statname, icon }) => {
     return (

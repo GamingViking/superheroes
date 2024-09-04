@@ -25,33 +25,33 @@
 //Separate/abstract logic so that not too much is in one component (separate components for each building block/display piece)
 //caching in various forms? - cache main page with a third party application like Redis (likely overkill for a single page)
 //Bind HeroList so it stays on screen - threw a container on it
+//Fix Shift + Mousewheel text so that it doesn't scroll - added an extra outter div, kept visual style on outter div and scrollable components on inner div, text div outside of inner div
+//starting heroes cut off if using an incomplete name search, i.e. search "o" - caused by a sizing issue when using flex on a large list where items overflowed to the left, fixed by switching to in-line block with whitespace-nowrap
+//Write unit tests (aka learn how to write unit tests) - for logical components
+//Hero list starts at the same scroll location with different searches - fixed by incorporating a useEffect getElementById and Scroll to left: 0 - (Implement with ref?)
+//Media query size differences for mobile, normal, and large screens? - md: for display alterations (i.e. col vs row)
+//Add custom colors to tailwind library for convenient/repeated use - used online converter to switch to tailwind style names
+//Bolding part of text, not tailwindy? - using <strong> is still semantic
 
 //How to keep API call server side with useState/useEffect being client side?
 //Aesthetic improvements?
-//Bolding part of text, not tailwindy?
 //Hiding API key in github? Best way to deploy?
 //Transparent div to block out content? Impossible?
 //Separate aliases with a comma - state altering solution for this? (went with a join statement)
 //HeroInfoPassingProps interface for passing props?
-//Fix Shift + Mousewheel text so that it doesn't scroll - added an extra outter div, kept visual style on outter div and scrollable components on inner div, text div outside of inner div
+//pass props more efficiently - not individually named (article - spread operator?) - only possible for props that share types with a named element? (i.e. input?)
 
-//Write unit tests (aka learn how to write unit tests)
 //get code into a test environment (some type of production build - can make url hard to access)
 
-//starting heroes cut off if using an incomplete name search, i.e. search "o"
-//Hero list starts at the same scroll location with different searches
-//Hero stat NAN on a different line from icon for mobile (CatII)
-//pass props more efficiently - not individually named (article - spread operator?)
-//Media query size differences for mobile, normal, and large screens?
-//Add custom colors to tailwind library for convenient/repeated use - make variables?
 //Extract left/right scroll arrows into separate components?
 //Change amount of color distribution in background gradient?
 //loading display for slower computers/(low-mid throttle)
-//Awkward pixel-specific screen size set in themes for md media query
+//Add a scrollbar/indicator for scrollable contenet in background?
+//Interface Powerstat props
 
 'use client'
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import HeroInfo from './Interfaces/HeroInfoInterface';
 import HeroData from './Interfaces/HeroDataInterface';
 import Title from './components/Title';

@@ -4,6 +4,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 
 const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId }) => {
+  const scrollLocationRef = useRef(null);
   useEffect(() => {
     document.getElementById('content')?.scrollTo({left: 0})
   }, [heroes]);
@@ -17,11 +18,11 @@ const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId }) => {
           <div className="flex w-1/12 justify-center transition-transform transform hover:scale-125" onClick={() => {handleClick("left")}}><IoIosArrowBack className="self-center size-10 "/></div>
           <div className="w-5/6 border-2 border-zinc-950 rounded-lg bg-fuchsia-950 text-white">
             <div id="content" className="justify-start overflow-scroll flex flex-col">
-              <ul className='scroll-smooth text-center p-4 my-4 justify-center whitespace-nowrap'>
+              <ul className="text-center p-4 my-4 whitespace-nowrap">
                 {heroes ? heroes.map(hero => 
                 <li 
                   key={hero.id} 
-                  className="inline-block mx-2 flex-none transition-transform transform hover:scale-125" 
+                  className="inline-block mx-2 transition-transform transform hover:scale-125" 
                   onClick={() => setSearchId(hero.id)} >
                     <div className="size-32 rounded-full overflow-hidden">
                       <img className="content-cover" src={hero.image.url}/>
