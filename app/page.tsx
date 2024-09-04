@@ -32,6 +32,7 @@
 //Media query size differences for mobile, normal, and large screens? - md: for display alterations (i.e. col vs row)
 //Add custom colors to tailwind library for convenient/repeated use - used online converter to switch to tailwind style names
 //Bolding part of text, not tailwindy? - using <strong> is still semantic
+//Add a scrollbar/indicator for scrollable contenet in background? - prefer the look without scrollbars
 
 //How to keep API call server side with useState/useEffect being client side?
 //Aesthetic improvements?
@@ -43,11 +44,8 @@
 
 //get code into a test environment (some type of production build - can make url hard to access)
 
-//Extract left/right scroll arrows into separate components?
 //Change amount of color distribution in background gradient?
 //loading display for slower computers/(low-mid throttle)
-//Add a scrollbar/indicator for scrollable contenet in background?
-//Interface Powerstat props
 
 'use client'
 
@@ -64,7 +62,7 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 const DataComponent: React.FC = () => {
   const [heroes, setHeroes] = useState<HeroData[]>([]);
-  // const [isLoading, setLoading] = useState<boolean>(true);
+  const [isLoading, setLoading] = useState<boolean>(true);
   const [searchString, setSearchString] = useState<string>("");
   const [search, setSearch] = useState<string>("batman");
   const [searchId, setSearchId] = useState<number>(70);
@@ -92,9 +90,9 @@ const DataComponent: React.FC = () => {
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } 
-      // finally {
-      //   setLoading(false);
-      // }
+      finally {
+        setLoading(false);
+      }
     };
     fetchData();
   }, [search]);
@@ -112,9 +110,9 @@ const DataComponent: React.FC = () => {
         console.error('Failed to fetch data:', error);
       } 
 
-      // finally {
-      //   setLoading(false);
-      // }
+      finally {
+        setLoading(false);
+      }
     };
     fetchHeroInfo();
   }, [searchId]);
@@ -160,13 +158,14 @@ const DataComponent: React.FC = () => {
     setaliases(heroInfo?.biography?.aliases.join(", "));
   }, [heroInfo?.biography])
 
-  //if (isLoading) return <p>Loading...</p>;
+  // if (isLoading) return <p>Loading...</p>;
+  // if (isLoading) return <img src={"./images/Half moon.gif"} alt="loading..." />;
 
   return (
     <div className={`bg-gradient-to-r ${bgColor1} ${bgColor2} ${bgColor3}`} style={{paddingBottom: 10}}>
       <Title/>
       <SearchBar search={search} setSearch={setSearch} searchString={searchString} setSearchString={setSearchString}/>
-      <HeroList heroes={heroes} setSearchId={setSearchId}/>
+      <HeroList heroes={heroes} isLoading={isLoading} setSearchId={setSearchId}/>
       <HeroName heroInfo={heroInfo}/>
       <HeroInfoContainer heroInfo={heroInfo} intelligence={intelligence} strength={strength} speed={speed} durability={durability} power={power} combat={combat} aliases={aliases}/>
     </div>

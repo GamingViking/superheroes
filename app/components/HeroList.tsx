@@ -3,7 +3,7 @@ import HeroListProps from "../Interfaces/HeroListPropsInterface";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 
-const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId }) => {
+const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId, isLoading }) => {
   const scrollLocationRef = useRef(null);
   useEffect(() => {
     document.getElementById('content')?.scrollTo({left: 0})
@@ -16,8 +16,14 @@ const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId }) => {
     return(
         <div className="flex justify-center mb-2">
           <div className="flex w-1/12 justify-center transition-transform transform hover:scale-125" onClick={() => {handleClick("left")}}><IoIosArrowBack className="self-center size-10 "/></div>
+          {isLoading ? (
+            <div className="h-24 w-5/6 border-2 border-zinc-950 rounded-lg bg-white flex items-center justify-center">
+              <h2>Now Loading: </h2>
+              <img className="h-8 w-8 ml-2" src={"./images/Moving blocks.gif"} alt="loading..." />
+            </div>
+            ) : (   
           <div className="w-5/6 border-2 border-zinc-950 rounded-lg bg-fuchsia-950 text-white">
-            <div id="content" className="justify-start overflow-scroll flex flex-col">
+            <div id="content" className="justify-start overflow-scroll flex flex-col">  
               <ul className="text-center p-4 my-4 whitespace-nowrap">
                 {heroes ? heroes.map(hero => 
                 <li 
@@ -33,6 +39,8 @@ const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId }) => {
             </div>
             <div className="flex text-xs font-thin justify-center">Shift + Mousewheel to scroll</div>
           </div>
+                )}
+
           <div className="flex w-1/12 justify-center transition-transform transform hover:scale-125" onClick={() => {handleClick("right")}}><IoIosArrowForward className="self-center size-10"/></div>
         </div>
     );
