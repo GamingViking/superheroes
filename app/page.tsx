@@ -102,7 +102,7 @@ const DataComponent: React.FC = () => {
   }, [heroInfo?.biography])
 
   return (
-    <div className={`bg-gradient-to-r ${bgColor1} ${bgColor2} ${bgColor3}`} style={{paddingBottom: 10}}>
+    <div className={`bg-gradient-to-r ${bgColor1} ${bgColor2} ${bgColor3}`} style={{paddingBottom: 10, minHeight: "100vh"}}>
       <Title/>
       <SearchBar search={search} setSearch={setSearch} searchString={searchString} setSearchString={setSearchString}/>
       <HeroList heroes={heroes} isLoading={isLoading} setSearchId={setSearchId}/>
