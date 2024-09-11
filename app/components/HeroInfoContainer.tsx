@@ -16,7 +16,7 @@ const HeroInfoContainer: React.FC<HeroInfoContainerProps> = ({ heroInfo, aliases
                 <div className="justify-center mx-1">
                 <img src={heroInfo?.image?.url} alt={heroInfo.name} className="object-cover w-72 h-96" />
                 </div>} 
-            <div className="p-2 mx-1 w-96 text-white">
+            <div className="p-2 mx-1 xs:w-96 w-80 text-white">
                 <div className="flex flex-row">
                     <InfoButton handleSectionClick={handleSectionClick} selection="Description"/>
                     <InfoButton handleSectionClick={handleSectionClick} selection="Stats"/>

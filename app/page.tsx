@@ -103,11 +103,11 @@ const DataComponent: React.FC = () => {
 
   return (
     <div className={`bg-gradient-to-r ${bgColor1} ${bgColor2} ${bgColor3}`} style={{paddingBottom: 10, minHeight: "100vh"}}>
-      <Title/>
-      <SearchBar search={search} setSearch={setSearch} searchString={searchString} setSearchString={setSearchString}/>
-      <HeroList heroes={heroes} isLoading={isLoading} setSearchId={setSearchId}/>
-      <HeroName heroInfo={heroInfo}/>
-      <HeroInfoContainer heroInfo={heroInfo} intelligence={intelligence} strength={strength} speed={speed} durability={durability} power={power} combat={combat} aliases={aliases}/>
+        <Title/>
+        <SearchBar search={search} setSearch={setSearch} searchString={searchString} setSearchString={setSearchString}/>
+        <HeroList heroes={heroes} isLoading={isLoading} setSearchId={setSearchId}/>
+        <HeroName heroInfo={heroInfo}/>
+        <HeroInfoContainer heroInfo={heroInfo} intelligence={intelligence} strength={strength} speed={speed} durability={durability} power={power} combat={combat} aliases={aliases}/>
     </div>
   );
 };
