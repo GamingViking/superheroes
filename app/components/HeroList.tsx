@@ -20,9 +20,9 @@ const HeroList: React.FC<HeroListProps> = ({ heroes, setSearchId, isLoading }) =
               <h2>Now Loading: </h2>
               <img className="h-8 w-8 ml-2" src={"./images/Moving blocks.gif"} alt="loading..." />
             </div>
-            ) : (   
+            ) : (  
           <div className="w-5/6 border-2 border-zinc-950 rounded-lg bg-fuchsia-950 text-white">
-            <div id="content" className="justify-start overflow-scroll flex flex-col">  
+            <div id="content" className="justify-start overflow-scroll flex flex-col no-scrollbar">  
               <ul className="text-center p-4 my-4 whitespace-nowrap">
                 {heroes ? heroes.map(hero => 
                 <li 
