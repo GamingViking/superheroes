@@ -31,7 +31,8 @@ const SearchBar: React.FC<SearchBarProps> = ({setSearch, searchString, setSearch
           placeholder=" Hero search"/>
           <button 
           className="bg-white rounded-full border-2 border-zinc-950 p-1 relative top-0.5"
-          type="submit"><SearchIcon></SearchIcon>
+          type="submit"
+          aria-label="search"><SearchIcon></SearchIcon>
           </button>
         </form>
       </div>
